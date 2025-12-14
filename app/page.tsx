@@ -1,3 +1,3 @@
-export default function Page() {
-  return <div>Welcome to the page!</div>
-}
+import IndexPage from "../pages/index"
+
+export default IndexPage
