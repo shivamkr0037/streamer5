@@ -1,5 +1,5 @@
-import { listRooms } from "@/lib/cache"
-import { generateId } from "@/lib/utils"
+import { listRooms } from "../../../lib/cache"
+import { generateId } from "../../../lib/utils"
 import { NextResponse } from "next/server"
 
 export async function GET() {
