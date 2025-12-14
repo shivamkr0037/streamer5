@@ -1,23 +1,32 @@
 {
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next run",
-    "lint": "next lint"
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next run"
   },
   "dependencies": {
-    "next": "14.2.10",
+    "@vercel/analytics": "1.6.1",
+    "class-variance-authority": "0.7.1",
+    "clsx": "2.1.1",
+    "components": "0.1.0",
+    "geist": "1.5.1",
+    "lucide-react": "0.561.0",
+    "next": "14.2.35",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^18.2.0",
     "react-full-screen": "^1.1.1",
     "react-player": "^2.14.1",
     "react-tooltip": "^5.25.1",
+    "shadcn": "3.6.1",
     "sharp": "^0.33.1",
     "socket.io": "^4.7.2",
     "socket.io-client": "^4.7.2",
     "swr": "^2.2.4",
+    "tailwind-merge": "3.4.0",
+    "tailwindcss-animate": "1.0.7",
     "unique-names-generator": "^4.7.1"
   },
   "devDependencies": {

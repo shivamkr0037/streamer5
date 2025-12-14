@@ -1,5 +1,7 @@
-import React, { FC, useState } from "react"
-import { MediaOption, PlayerState, Subtitle } from "../../lib/types"
+"use client"
+
+import { type FC, useState } from "react"
+import type { MediaOption, PlayerState, Subtitle } from "../../lib/types"
 import InteractionHandler from "../action/InteractionHandler"
 import IconBigPause from "../icon/IconBigPause"
 import IconBigPlay from "../icon/IconBigPlay"
@@ -112,7 +114,7 @@ const Controls: FC<Props> = ({
           setShowControls(false)
         }
       },
-      touch ? 3200 : 1600
+      touch ? 3200 : 1600,
     )
   }
 
@@ -123,7 +125,7 @@ const Controls: FC<Props> = ({
       <InteractionHandler
         className={classNames(
           "absolute top-0 left-0 w-full h-full transition-opacity flex flex-col",
-          show ? "opacity-100" : "opacity-0"
+          show ? "opacity-100" : "opacity-0 pointer-events-none",
         )}
         onMove={(_, touch) => {
           setShowControls(!touch)
@@ -137,9 +139,7 @@ const Controls: FC<Props> = ({
         }}
       >
         <InteractionHandler
-          className={
-            "flex grow cursor-pointer items-center align-middle justify-items-center justify-center"
-          }
+          className={"flex grow cursor-pointer items-center align-middle justify-items-center justify-center"}
           onClick={(_, touch) => {
             if (interaction) {
               doubleClick = true
@@ -162,7 +162,7 @@ const Controls: FC<Props> = ({
         </InteractionHandler>
 
         <InputSlider
-          className={"bg-dark-900/20"}
+          className="glass-light"
           value={progress}
           onChange={(value) => {
             setProgress(value)
@@ -173,10 +173,10 @@ const Controls: FC<Props> = ({
           showValueHover={true}
         />
 
-        <div className={"flex flex-row p-1 items-stretch bg-dark-900/20"}>
+        <div className="flex flex-row p-3 items-stretch glass-light border-t border-dark-700/50 gap-2">
           {playlist.currentIndex > 0 && (
             <ControlButton
-              tooltip={"Play previous"}
+              tooltip="Play previous"
               onClick={() => {
                 if (show && playlist.currentIndex > 0) {
                   playIndex(playlist.currentIndex - 1)
@@ -200,17 +200,11 @@ const Controls: FC<Props> = ({
             }}
             interaction={showControlsAction}
           >
-            {playEnded() ? (
-              <IconReplay />
-            ) : paused ? (
-              <IconPlay />
-            ) : (
-              <IconPause />
-            )}
+            {playEnded() ? <IconReplay /> : paused ? <IconPlay /> : <IconPause />}
           </ControlButton>
           {playlist.currentIndex < playlist.items.length - 1 && (
             <ControlButton
-              tooltip={"Skip"}
+              tooltip="Skip"
               onClick={() => {
                 if (show && playlist.currentIndex < playlist.items.length - 1) {
                   playIndex(playlist.currentIndex + 1)
@@ -229,8 +223,8 @@ const Controls: FC<Props> = ({
             interaction={showControlsAction}
           />
           <ControlButton
-            tooltip={"Current progress"}
-            className={"ml-auto flex items-center py-1"}
+            tooltip="Current progress"
+            className="ml-auto flex items-center py-1 px-3"
             onClick={() => {
               if (show) {
                 setShowTimePlayed(!showTimePlayed)
@@ -238,24 +232,22 @@ const Controls: FC<Props> = ({
             }}
             interaction={showControlsAction}
           >
-            <span>
-              {(showTimePlayed
-                ? secondsToTime(progress)
-                : "-" + secondsToTime(duration - progress)) +
+            <span className="text-sm font-medium tabular-nums">
+              {(showTimePlayed ? secondsToTime(progress) : "-" + secondsToTime(duration - progress)) +
                 " / " +
                 secondsToTime(duration)}
             </span>
           </ControlButton>
 
           <ControlButton
-            tooltip={"Open source in new tab"}
+            tooltip="Open source in new tab"
             onClick={() => {
               window.open(currentSrc.src, "_blank")?.focus()
             }}
             interaction={showControlsAction}
           >
-            <Link href={currentSrc.src} target={"_blank"} rel={"noreferrer"}>
-              <IconNewTab sizeClassName={"w-5 h-5"} />
+            <Link href={currentSrc.src} target="_blank" rel="noreferrer">
+              <IconNewTab sizeClassName="w-5 h-5" />
             </Link>
           </ControlButton>
 
@@ -290,7 +282,8 @@ const Controls: FC<Props> = ({
 
       <Tooltip
         style={{
-          backgroundColor: "var(--dark-700)",
+          backgroundColor: "hsl(var(--dark-700))",
+          borderRadius: "0.5rem",
         }}
       />
     </>

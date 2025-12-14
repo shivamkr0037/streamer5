@@ -1,4 +1,6 @@
-import { FC, MouseEventHandler, ReactNode } from "react"
+"use client"
+
+import type { FC, MouseEventHandler, ReactNode } from "react"
 import classNames from "classnames"
 
 interface Props {
@@ -18,7 +20,7 @@ const Button: FC<Props> = ({
   onClick,
   className = "",
   type = "button",
-  actionClasses = "action",
+  actionClasses = "action rounded-xl",
   disabled = false,
   children,
 }) => {
@@ -26,11 +28,16 @@ const Button: FC<Props> = ({
     <button
       id={id}
       data-tooltip-content={tooltip}
-      data-tooltip-variant={"dark"}
+      data-tooltip-variant="dark"
       onClick={onClick}
       type={type}
       disabled={disabled}
-      className={classNames("p-2 rounded", actionClasses, className)}
+      className={classNames(
+        "p-2 font-medium transition-all duration-200",
+        actionClasses,
+        className,
+        disabled && "opacity-50 cursor-not-allowed",
+      )}
     >
       {children}
     </button>

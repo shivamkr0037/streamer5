@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221 83% 53%;
+    --radius: 0.5rem;
+
+    /* Modern color palette inspired by contemporary streaming platforms */
+    --dark-50: 240 20% 98%;
+    --dark-100: 240 15% 95%;
+    --dark-200: 240 12% 88%;
+    --dark-300: 240 10% 75%;
+    --dark-400: 240 8% 60%;
+    --dark-500: 240 6% 45%;
+    --dark-600: 240 8% 30%;
+    --dark-700: 240 10% 20%;
+    --dark-800: 240 12% 12%;
+    --dark-900: 240 15% 8%;
+    --dark-1000: 240 18% 4%;
+
+    --primary-700: 221 83% 58%;
+    --primary-800: 221 83% 53%;
+    --primary-900: 221 83% 48%;
+
+    --accent-900: 200 60% 55%;
+  }
+
+  .dark {
+    --background: 240 15% 8%;
+    --foreground: 240 10% 98%;
+    --card: 240 12% 12%;
+    --card-foreground: 240 10% 98%;
+    --popover: 240 12% 12%;
+    --popover-foreground: 240 10% 98%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 10% 20%;
+    --secondary-foreground: 240 10% 98%;
+    --muted: 240 10% 20%;
+    --muted-foreground: 240 8% 60%;
+    --accent: 240 10% 20%;
+    --accent-foreground: 240 10% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 240 10% 98%;
+    --border: 240 10% 20%;
+    --input: 240 10% 20%;
+    --ring: 221 83% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-dark-900 text-neutral-100 antialiased;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+      "Droid Sans", "Helvetica Neue", sans-serif;
+  }
+
+  /* Modern action button styles with smooth transitions */
+  .action {
+    @apply transition-all duration-200 ease-out;
+  }
+
+  .action:hover {
+    @apply bg-dark-700;
+  }
+
+  .action:active {
+    @apply bg-dark-600 scale-95;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Responsive utility classes for modern layout */
+  .hide-below-sm {
+    @apply hidden sm:block;
+  }
+
+  .hidden-below-sm {
+    @apply hidden sm:inline;
+  }
+
+  /* Smooth scroll behavior */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Modern backdrop blur effects */
+  .glass {
+    @apply bg-dark-900/80 backdrop-blur-md;
+  }
+
+  .glass-light {
+    @apply bg-dark-800/60 backdrop-blur-sm;
+  }
+}

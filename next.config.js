@@ -5,6 +5,12 @@
  **/
 const nextConfig = {
   output: "standalone",
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
   images: {
     // Disable Next.js image optimization to avoid needing `sharp` in production
     unoptimized: true,

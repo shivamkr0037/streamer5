@@ -1,13 +1,9 @@
 "use client"
-import { FC, useEffect, useState } from "react"
+import { type FC, useEffect, useState } from "react"
 import Player from "./player/Player"
-import {
-  ClientToServerEvents,
-  createClientSocket,
-  ServerToClientEvents,
-} from "../lib/socket"
+import { type ClientToServerEvents, createClientSocket, type ServerToClientEvents } from "../lib/socket"
 import Button from "./action/Button"
-import { Socket } from "socket.io-client"
+import type { Socket } from "socket.io-client"
 import ConnectingAlert from "./alert/ConnectingAlert"
 import PlaylistMenu from "./playlist/PlaylistMenu"
 import IconLoop from "./icon/IconLoop"
@@ -24,10 +20,7 @@ let connecting = false
 
 const Room: FC<Props> = ({ id }) => {
   const [connected, setConnected] = useState(false)
-  const [socket, setSocket] = useState<Socket<
-    ServerToClientEvents,
-    ClientToServerEvents
-  > | null>(null)
+  const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
   const [url, setUrl] = useState("")
 
   useEffect(() => {
@@ -72,40 +65,42 @@ const Room: FC<Props> = ({ id }) => {
   }
 
   return (
-    <div className={"flex flex-col sm:flex-row gap-1"}>
-      <div className={"grow"}>
+    <div className="flex flex-col lg:flex-row gap-4 p-4">
+      <div className="flex-1 space-y-4">
         <Player roomId={id} socket={socket} />
 
-        <div className={"flex flex-row gap-1 p-1"}>
-          <Button
-            tooltip={"Do a forced manual sync"}
-            className={"p-2 flex flex-row gap-1 items-center"}
-            onClick={() => {
-              console.log("Fetching update", socket?.id)
-              socket?.emit("fetch")
-            }}
-          >
-            <IconLoop className={"hover:animate-spin"} />
-            <div className={"hidden-below-sm"}>Manual sync</div>
-          </Button>
-          <InputUrl
-            className={"grow"}
-            url={url}
-            placeholder={"Play url now"}
-            tooltip={"Play given url now"}
-            onChange={setUrl}
-            onSubmit={() => {
-              console.log("Requesting", url, "now")
-              socket?.emit("playUrl", url)
-              setUrl("")
-            }}
-          >
-            Play
-          </InputUrl>
+        <div className="glass-light rounded-2xl p-4 border border-dark-700">
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              tooltip="Do a forced manual sync"
+              className="flex items-center justify-center gap-2 py-2 px-4"
+              actionClasses="bg-dark-700 hover:bg-dark-600 active:bg-dark-500 rounded-xl transition-all"
+              onClick={() => {
+                console.log("Fetching update", socket?.id)
+                socket?.emit("fetch")
+              }}
+            >
+              <IconLoop className="hover:animate-spin" />
+              <span className="text-sm font-medium">Manual sync</span>
+            </Button>
+            <InputUrl
+              className="flex-1"
+              url={url}
+              placeholder="Enter video URL to play now"
+              tooltip="Play given url now"
+              onChange={setUrl}
+              onSubmit={() => {
+                console.log("Requesting", url, "now")
+                socket?.emit("playUrl", url)
+                setUrl("")
+              }}
+            >
+              Play
+            </InputUrl>
+          </div>
         </div>
 
-        {/* Chat + YouTube Search */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 p-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <ChatPanel socket={socket} />
           <YoutubeSearch socket={socket} />
         </div>
