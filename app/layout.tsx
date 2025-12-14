@@ -1,29 +1,29 @@
-import type React from "react"
-import type { Metadata } from "next"
-import { Analytics } from "@vercel/analytics/next"
-import "../styles/globals.css"
+import type { Metadata } from 'next'
+import { GeistSans } from 'geist/font/sans'
+import { GeistMono } from 'geist/font/mono'
+import { Analytics } from '@vercel/analytics/next'
+import './globals.css'
 
 export const metadata: Metadata = {
-  title: "StreamSync - Watch together, stay in sync",
-  description: "Watch videos or play music in sync with your friends",
-  generator: "v0.app",
+  title: 'v0 App',
+  description: 'Created with v0',
+  generator: 'v0.app',
   icons: {
     icon: [
       {
-        url: "/favicon-32x32.png",
-        sizes: "32x32",
-        type: "image/png",
+        url: '/icon-light-32x32.png',
+        media: '(prefers-color-scheme: light)',
       },
       {
-        url: "/favicon-16x16.png",
-        sizes: "16x16",
-        type: "image/png",
+        url: '/icon-dark-32x32.png',
+        media: '(prefers-color-scheme: dark)',
       },
       {
-        url: "/favicon.ico",
+        url: '/icon.svg',
+        type: 'image/svg+xml',
       },
     ],
-    apple: "/apple-touch-icon.png",
+    apple: '/apple-icon.png',
   },
 }
 
@@ -34,6 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <style>{`
+html {
+  font-family: ${GeistSans.style.fontFamily};
+  --font-sans: ${GeistSans.variable};
+  --font-mono: ${GeistMono.variable};
+}
+        `}</style>
+      </head>
       <body>
         {children}
         <Analytics />
