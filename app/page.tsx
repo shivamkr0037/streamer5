@@ -1,7 +1,3 @@
-"use client"
+import HomePage from "../pages/index"
 
-import BufferAlert from "../components/alert/BufferAlert"
-
-export default function SyntheticV0PageForDeployment() {
-  return <BufferAlert />
-}
+export default HomePage
