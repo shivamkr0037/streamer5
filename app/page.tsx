@@ -15,20 +15,14 @@ export default function Page() {
     setIsCreating(true)
 
     try {
-      console.log("[v0] Creating room...")
-      const response = await fetch("/api/generate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      })
+      const response = await fetch("/api/generate")
 
-      console.log("[v0] Response status:", response.status)
       if (!response.ok) throw new Error("Failed to create room")
 
       const data = await response.json()
-      console.log("[v0] Room created:", data)
       router.push(`/room/${data.roomId}`)
     } catch (err) {
-      console.error("[v0] Room creation error:", err)
+      console.error("Room creation error:", err)
       setError("Failed to create room. Please try again.")
       setIsCreating(false)
     }
